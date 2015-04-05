@@ -4,7 +4,7 @@ ansible-simple-slurm-cluster
 This repo contains a set of Ansible roles for setting up a relatively basic
 HPC-style compute cluster, along with an example playbook for using them.
 
-'''These scipts should not be considered production-quality!''' (Though
+**These scipts should not be considered production-quality!** (Though
 you can always use them or get inspiration from them if you like.) I use
 the roles in this repo to set up ephemeral clusters while playing with new
 ideas or writing software. I am rarely concerned with stability or user
