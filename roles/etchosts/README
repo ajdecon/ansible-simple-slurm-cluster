@@ -1,0 +1,10 @@
+etchosts
+========
+
+A simple role for setting up an /etc/hosts file based on an Ansible group.
+
+Variables:
+----------
+
+* hosts_groupname: Ansible group to iterate through when generating file.
+  Default value is "cluster".

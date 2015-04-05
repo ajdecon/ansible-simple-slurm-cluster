@@ -1,0 +1,46 @@
+---
+- name: munge and slurm are installed
+  action: yum name={{item}} state=present
+  with_items:
+  - munge
+  - slurm
+  - slurm-munge
+  - slurm-plugins
+  - slurm-pam_slurm
+  - slurm-perlapi
+  - libcgroup
+
+- name: cgroups are started and enabled
+  action: service name=cgconfig state=started enabled=yes
+
+- name: munge key is present
+  action: copy src=munge.key dest=/etc/munge/munge.key owner=munge group=munge mode=0600 force=yes
+  notify: 
+  - munge is restarted
+
+- name: munge is started and enabled
+  action: service name=munge state=started enabled=yes
+
+- name: slurm group exists
+  action: group name=slurm state=present
+
+- name: slurm user exists
+  action: user name=slurm group=slurm state=present
+
+- name: slurm_state_dir exists
+  file: path={{ slurm_state_dir }} owner=slurm group=slurm mode=0755 state=directory
+
+- name: accounting storage file exists
+  file: path={{ slurm_acct_file }} owner=slurm group=slurm mode=0644 state=touch
+
+- name: slurm is configured
+  action: template src={{item}} dest=/etc/slurm/{{item}} owner=slurm mode=0644
+  with_items:
+  - slurm.conf
+  - cgroup.conf
+  notify:
+  - slurm is restarted
+
+- name: slurm is started and enabled
+  action: service name=slurm state=started enabled=yes
+

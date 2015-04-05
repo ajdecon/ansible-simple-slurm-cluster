@@ -1,0 +1,7 @@
+{% for export in nfs_exports -%}
+    {% for g in nfs_allowed_groups -%}
+        {% for host in groups[g] -%}
+{{export.path}}     {{hostvars[host]['ansible_eth0']['ipv4']['address']}}/255.255.255.255({{export.options}})
+        {% endfor %}
+    {% endfor %}
+{% endfor %}

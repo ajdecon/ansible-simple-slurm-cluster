@@ -1,0 +1,16 @@
+---
+- name: install gmond packages
+  yum: name={{ item }} state=present
+  with_items:
+  - ganglia
+  - ganglia-gmond
+  - ganglia-gmond-python
+
+- name: gmond is configured
+  template: src="gmond.conf" dest="/etc/ganglia/gmond.conf"
+  notify:
+  - gmond is restarted
+
+- name: gmond is enabled and running
+  service: name=gmond state=started enabled=yes
+

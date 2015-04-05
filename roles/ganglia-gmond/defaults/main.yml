@@ -1,0 +1,5 @@
+cluster_name: defaultcluster
+cluster_owner: unspecified
+target_host: head
+target_port: 8649
+recv_port: 8649

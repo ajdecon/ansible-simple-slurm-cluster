@@ -1,0 +1,34 @@
+---
+- name: slurmdbd packages are installed
+  yum: name={{item}} state=present
+  with_items:
+  - slurm-munge
+  - slurm-plugins
+  - munge
+  - slurm-slurmdbd
+  - slurm-sql
+  - mysql-server
+  - MySQL-python
+
+- name: mysqld is running
+  service: name=mysqld state=started
+
+- name: slurm user exists
+  user: name=slurm state=present
+
+- name: slurm mysqld user is configured
+  mysql_user: 
+    name=slurm 
+    password={{slurmdbd_password}} 
+    priv="slurm_acct_db.*:ALL"
+    login_host={{mysql_host}} 
+    login_user={{mysql_admin}}
+    login_password={{mysql_pw}}
+
+- name: slurmdbd service is configured
+  template: src=slurmdbd.conf dest=/etc/slurm/slurmdbd.conf 
+  notify:
+  - slurmdbd is restarted
+
+- name: slurmdbd is started and enabled
+  service: name=slurmdbd state=started enabled=yes

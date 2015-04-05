@@ -1,0 +1,9 @@
+---
+- name: upload yum-s3 rpm
+  action: copy src=yum-s3-0.2.4-1.noarch.rpm dest=/tmp/yum-s3-0.2.4-1.noarch.rpm
+
+- name: install yum-s3
+  action: yum name=/tmp/yum-s3-0.2.4-1.noarch.rpm state=present
+  
+- name: yum.repos.d includes ajdecon-repo.el6.repo
+  action: template src=ajdecon-repo.el6.repo.j2 dest=/etc/yum.repos.d/ajdecon-repo.el6.repo 

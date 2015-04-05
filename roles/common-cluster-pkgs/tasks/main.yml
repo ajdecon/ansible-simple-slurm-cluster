@@ -1,0 +1,72 @@
+---
+- name: install common packages
+  yum: name={{ item }} state=present
+  with_items:
+  - "environment-modules"
+  - "pdsh"
+  - "pdsh-rcmd-ssh"
+  - "@development"
+  - "gcc-gfortran"
+  - hdf5
+  - hdf5-devel
+  - hdf5-static
+  - netcdf
+  - netcdf-devel
+
+- name: install openib support
+  when: openib_enabled
+  yum: name={{ item }} state=present
+  with_items:
+  - "@infiniband"
+  - libibcm-devel
+  - librdmacm-devel
+  - libibverbs-devel
+  - libibmad-devel
+  - libibumad-devel
+
+- name: install openblas
+  when: openblas_enabled
+  yum: name={{ item }} state=present
+  with_items:
+  - openblas
+  - openblas-devel
+  - openblas-openmp
+
+- name: install OpenMPI packages
+  when: openmpi_enabled
+  yum: name={{ item }} state=present
+  with_items:
+  - openmpi
+  - openmpi-devel
+  - mpi4py-openmpi
+  - mpitests-openmpi
+  - boost-openmpi
+  - boost-openmpi-devel
+  - paraview-openmpi
+  - hdf5-openmpi
+  - scalapack-openmpi
+
+- name: install mpich2 packages
+  when: mpich2_enabled
+  yum: name={{ item }} state=present
+  with_items:
+  - mpich2
+  - mpich2-devel
+  - mpi4py-mpich
+  - mpitests-mpich
+  - hdf5-mpich
+  - paraview-mpich
+  - scalapack-mpich
+
+- name: install python packages
+  when: python_enabled
+  yum: name={{ item }} state=present
+  with_items:
+  - numpy
+  - numpy-f2py
+  - scipy
+  - h5py
+
+- name: upload osu mpi micro-benchmarks
+  when: upload_osu_benchmarks
+  copy: src="osu-micro-benchmarks-4.4.1.tar.gz" dest="/opt/osu-micro-benchmarks-4.4.1.tar.gz" mode=0444

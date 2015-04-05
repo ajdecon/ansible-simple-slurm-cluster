@@ -1,0 +1,14 @@
+---
+- name: ensure rsyslog is installed
+  yum: name=rsyslog state=present
+  
+- name: add collect.conf to syslog config
+  template: src="collect.conf" dest="/etc/rsyslog.d/forward.conf"
+  notify:
+  - rsyslog is restarted
+
+- name: ensure /var/log/cluster exists
+  file: path=/var/log/cluster owner=root group=root mode=0700 state=directory
+
+- name: ensure rsyslog is running and enabled
+  service: name=rsyslog state=started enabled=yes

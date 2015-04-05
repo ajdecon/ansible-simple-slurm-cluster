@@ -1,0 +1,11 @@
+---
+- name: ensure rsyslog is installed
+  yum: name=rsyslog state=present
+  
+- name: add forward.conf to syslog config
+  template: src="forward.conf" dest="/etc/rsyslog.d/forward.conf"
+  notify:
+  - rsyslog is restarted
+
+- name: ensure rsyslog is running and enabled
+  service: name=rsyslog state=started enabled=yes

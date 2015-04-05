@@ -1,0 +1,3 @@
+---
+syslog_target: head
+syslog_target_port: 514

@@ -1,0 +1,19 @@
+---
+- name: ensure nfs-related packages are installed
+  yum: name={{item}} state=present
+  with_items:
+  - nfs-utils
+  - nfs-utils-lib
+  - nfs-utils-lib-devel
+  - nfs4-acl-tools
+
+- name: configure exports
+  template: src=exports dest=/etc/exports
+  notify:
+  - exportfs
+
+- name: ensure rpcbind is running
+  service: name=rpcbind state=started enabled=yes
+
+- name: ensure nfs is running
+  service: name=nfs state=started enabled=yes

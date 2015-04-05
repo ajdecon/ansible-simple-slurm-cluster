@@ -1,0 +1,10 @@
+---
+
+# Several of the roles (including the slurm role, nfs-client, and
+# rsyslog-forwarder roles) assume your head node will be named
+# "head". See the roles' defaults/main.yml files to see where this
+# might need to be changed.
+
+slurmctld_host: head
+slurm_cpus_per_node: 2
+upload_osu_benchmarks: true

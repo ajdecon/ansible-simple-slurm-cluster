@@ -1,0 +1,20 @@
+---
+- name: install ganglia packages
+  yum: name={{ item }} state=present
+  with_items:
+  - ganglia
+  - ganglia-devel
+  - ganglia-gmetad
+  - ganglia-web
+
+- name: gmetad is configured
+  template: src="gmetad.conf" dest="/etc/ganglia/gmetad.conf"
+  notify:
+  - gmetad is restarted
+
+- name: gmetad is enabled and running
+  service: name=gmetad state=started enabled=yes
+
+- name: httpd is enabled and running for the web interface
+  when: enable_web_interface
+  service: name=httpd state=started enabled=yes

@@ -1,0 +1,5 @@
+---
+slurmdbd_password: "$LurM42"
+mysql_host: localhost
+mysql_admin: root
+mysql_pw: "@ns1bl3!"

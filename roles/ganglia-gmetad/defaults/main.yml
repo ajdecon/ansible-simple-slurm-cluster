@@ -1,0 +1,5 @@
+---
+grid_name: "SlurmCluster"
+xml_port: 8651
+interactive_port: 8652
+enable_web_interface: true

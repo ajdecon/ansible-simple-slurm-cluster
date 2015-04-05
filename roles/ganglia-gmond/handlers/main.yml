@@ -1,0 +1,3 @@
+---
+- name: gmond is restarted
+  service: name=gmond state=restarted

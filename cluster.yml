@@ -1,0 +1,44 @@
+---
+# This Ansible playbook sets up a relatively basic HPC-style compute cluster
+# using the SLURM resource manager. It also sets up a basic NFS share of /home
+# to the compute nodes, configures Ganglia and syslog forwarding to make it
+# easier to monitor, and installs some common packages for HPC.
+#
+# Note that the file config.yml is used to define some variables which
+# configure the roles' behavior. The roles should be written in such a way that
+# you can run with all the defaults, and leave config.yml empty.
+
+
+# Run roles common to all hosts in cluster
+- hosts: cluster
+  user: root
+  vars_files:
+  - config.yml
+  - s3.yml
+  roles:
+  - "epel6"
+  - "ajdecon-repo"
+  - "sethostname"
+  - "etchosts"
+  - "slurm"
+  - "ganglia-gmond"
+  - "common-cluster-pkgs"
+
+# Run roles specific to the cluster headnode
+- hosts: head
+  user: root
+  vars_files:
+  - config.yml
+  roles:
+  - "nfs-server"
+  - "rsyslog-collector"
+  - "ganglia-gmetad"
+
+# Run roles specific to the cluster compute nodes
+- hosts: compute
+  user: root
+  vars_files:
+  - config.yml
+  roles:
+  - "nfs-client"
+  - "rsyslog-forwarder"

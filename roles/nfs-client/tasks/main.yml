@@ -1,0 +1,18 @@
+---
+- name: ensure nfs packages are installed
+  yum: name={{item}} state=present
+  with_items:
+  - nfs-utils
+  - nfs4-acl-tools
+
+- name: ensure mountpoints exist
+  file: path={{item.mountpoint}} state=directory
+  with_items: nfs_mounts
+
+- name: ensure rpcbind is running
+  service: name=rpcbind state=started enabled=yes
+
+- name: ensure filesystems are mounted
+  mount: name={{item.mountpoint}} src="{{item.server}}:{{item.path}}" fstype=nfs opts={{item.options}} state=mounted
+  with_items: nfs_mounts
+

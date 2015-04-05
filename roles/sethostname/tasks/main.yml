@@ -1,0 +1,13 @@
+---
+- name: live hostname set to setname value
+  action: command hostname {{setname}}
+
+- name: re-gather facts to update ansible_hostname
+  action: setup
+  when: not ansible_hostname == "{{ setname }}"
+
+- name: persistent hostname set to setname value
+  action: lineinfile dest=/etc/sysconfig/network regexp=^HOSTNAME= line=HOSTNAME={{setname}}
+
+- name: /etc/hosts reflects setname value
+  action: lineinfile dest=/etc/hosts regexp=^{{ansible_eth0.ipv4.address}} line="{{ansible_eth0.ipv4.address}}   {{setname}}"

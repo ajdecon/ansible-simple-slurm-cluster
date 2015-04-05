@@ -1,0 +1,6 @@
+---
+nfs_mounts:
+    - path: /home
+      mountpoint: /home
+      server: head
+      options: "defaults,vers=3"

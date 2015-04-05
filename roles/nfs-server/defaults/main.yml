@@ -1,0 +1,7 @@
+---
+nfs_exports:
+    - path: /home
+      options: "rw,no_root_squash"
+
+nfs_allowed_groups:
+    - cluster
