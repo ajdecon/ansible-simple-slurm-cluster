@@ -33,6 +33,11 @@
   - "nfs-server"
   - "rsyslog-collector"
   - "ganglia-gmetad"
+  - "elk-log-server"
+  - role: "rsyslog-forwarder"
+    syslog_target: "localhost"
+    syslog_target_port: 5200
+    syslog_fwd_file: "elk-fwd.conf"
 
 # Run roles specific to the cluster compute nodes
 - hosts: compute

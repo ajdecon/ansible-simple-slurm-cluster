@@ -1,0 +1,26 @@
+# This is an example inventory file for using the playbooks in this repo.
+# Note that I'm using a role called "sethostname" to change the hostname
+# of each host, according to the per-host value "setname" defined below.
+# An "etchosts" role then sets up /etc/hosts according to the system
+# hostnames.
+
+# Several of the roles assume the name of the head node will be "head".
+# Their defaults/main.yml files should make it clear where this is needs
+# to be changed if you don't want that name.
+
+# Other roles assume the groups "compute" and "cluster" are being used to
+# group the compute nodes and the entire cluster, respectively. Again, this
+# group name is usually defined as a variable in defaults/main.yml so you
+# can change it.
+
+[head]
+52.5.44.27         setname=head
+
+[compute]
+52.6.164.63         setname=compute0
+52.6.176.90         setname=compute1
+52.6.179.184         setname=compute2
+
+[cluster:children]
+head
+compute

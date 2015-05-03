@@ -1,0 +1,9 @@
+---
+- name: restart elasticsearch
+  service: name=elasticsearch state=restarted
+
+- name: restart supervisord
+  service: name=supervisord state=restarted
+
+- name: restart logstash
+  service: name=logstash state=restarted

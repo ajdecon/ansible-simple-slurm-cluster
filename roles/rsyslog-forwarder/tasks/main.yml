@@ -3,7 +3,7 @@
   yum: name=rsyslog state=present
   
 - name: add forward.conf to syslog config
-  template: src="forward.conf" dest="/etc/rsyslog.d/forward.conf"
+  template: src="forward.conf" dest="/etc/rsyslog.d/{{ syslog_fwd_file }}"
   notify:
   - rsyslog is restarted
 
