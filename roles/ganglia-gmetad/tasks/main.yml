@@ -2,7 +2,6 @@
 - name: install ganglia packages
   yum: name={{ item }} state=present
   with_items:
-  - ganglia
   - ganglia-devel
   - ganglia-gmetad
   - ganglia-web
@@ -18,3 +17,15 @@
 - name: httpd is enabled and running for the web interface
   when: enable_web_interface
   service: name=httpd state=started enabled=yes
+
+- name: ensure /var/lib/ganglia-web/dwoo/ is writable by web interface
+  when: enable_web_interface
+  file: path=/var/lib/ganglia-web/dwoo group=apache mode=0775
+
+- name: ensure /var/lib/ganglia-web/dwoo/cache is writable by web interface
+  when: enable_web_interface
+  file: path=/var/lib/ganglia-web/dwoo/cache group=apache mode=0775
+
+- name: ensure /var/lib/ganglia-web/dwoo/compiled is writable by web interface
+  when: enable_web_interface
+  file: path=/var/lib/ganglia-web/dwoo/compiled group=apache mode=0775
