@@ -1,0 +1,20 @@
+---
+- name: install collectd packages
+  yum:
+    name="{{ item }}"
+    state=present
+  with_items:
+  - collectd
+
+- name: configure collectd
+  template:
+    src=collectd.conf
+    dest=/etc/collectd.conf
+  notify:
+  - restart collectd
+
+- name: start and enable collectd
+  service:
+    name: "collectd"
+    state: "started"
+    enabled: "yes"

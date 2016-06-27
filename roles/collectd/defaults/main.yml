@@ -1,0 +1,5 @@
+---
+logstash_host: "localhost"
+logstash_port: "8011"
+
+df_fs_types: ['ext2', 'ext3', 'ext4', 'btrfs', 'xfs']
