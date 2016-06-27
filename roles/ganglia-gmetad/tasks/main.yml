@@ -18,14 +18,14 @@
   when: enable_web_interface
   service: name=httpd state=started enabled=yes
 
-- name: ensure /var/lib/ganglia-web/dwoo/ is writable by web interface
+- name: ensure /var/lib/ganglia/dwoo/ is writable by web interface
   when: enable_web_interface
-  file: path=/var/lib/ganglia-web/dwoo group=apache mode=0775
+  file: path=/var/lib/ganglia/dwoo group=apache mode=0775
 
-- name: ensure /var/lib/ganglia-web/dwoo/cache is writable by web interface
+- name: ensure /var/lib/ganglia/dwoo/cache is writable by web interface
   when: enable_web_interface
-  file: path=/var/lib/ganglia-web/dwoo/cache group=apache mode=0775
+  file: path=/var/lib/ganglia/dwoo/cache group=apache mode=0775
 
-- name: ensure /var/lib/ganglia-web/dwoo/compiled is writable by web interface
+- name: ensure /var/lib/ganglia/dwoo/compiled is writable by web interface
   when: enable_web_interface
-  file: path=/var/lib/ganglia-web/dwoo/compiled group=apache mode=0775
+  file: path=/var/lib/ganglia/dwoo/compiled group=apache mode=0775
