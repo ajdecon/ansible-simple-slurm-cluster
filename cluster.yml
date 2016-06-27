@@ -14,7 +14,7 @@
   user: root
   vars_files:
   - config.yml
-  - s3.yml
+  - s3real.yml
   roles:
   - "epel6"
   - "ajdecon-repo"
@@ -22,7 +22,10 @@
   - "etchosts"
   - "slurm"
   - "ganglia-gmond"
-  - "common-cluster-pkgs"
+  - role: "common-cluster-pkgs"
+    openmpi_enabled: true
+    mpich2_enabled: false
+    upload_osu_benchmarks: true
 
 # Run roles specific to the cluster headnode
 - hosts: head
