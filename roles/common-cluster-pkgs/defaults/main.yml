@@ -1,7 +1,7 @@
 ---
 openblas_enabled: true
 openmpi_enabled: true
-mpich2_enabled: true
+mpich2_enabled: false
 python_enabled: false
 openib_enabled: true
 upload_osu_benchmarks: false
