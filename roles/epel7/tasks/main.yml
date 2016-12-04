@@ -1,0 +1,10 @@
+---
+- name: copy epel rpm to /tmp
+  copy:
+    src: "epel-release-latest-7.noarch.rpm"
+    dest: "/tmp/epel-release-latest-7.noarch.rpm"
+
+- name: install epel rpm
+  package:
+    name: "/tmp/epel-release-latest-7.noarch.rpm"
+    state: "present"
