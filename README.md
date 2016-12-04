@@ -31,7 +31,7 @@ on.
 Prerequisites
 -------------
 
-- All the roles assume you're using EL6 (i.e. CentOS, RHEL, Scientific Linux)
+- All the roles assume you're using EL7 (i.e. CentOS, RHEL, Scientific Linux)
 
 - [SLURM](http://slurm.schedmd.com) and [Munge](https://code.google.com/p/munge/) 
   are not distributed as RPMs, so I built those RPMs and stuck
