@@ -1,0 +1,17 @@
+---
+- name: environment-modules is installed
+  package:
+    name: "environment-modules"
+    state: "present"
+
+- name: devtools are installed
+  package:
+    name: "{{ item }}"
+    state: "present"
+  with_items: devtools
+
+- name: applications are installed
+  package:
+    name: "{{ item }}"
+    state: "present"
+  with_items: applications

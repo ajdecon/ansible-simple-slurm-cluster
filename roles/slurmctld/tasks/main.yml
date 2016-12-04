@@ -10,9 +10,6 @@
   - slurm-perlapi
   - libcgroup
 
-- name: cgroups are started and enabled
-  service: name=cgconfig state=started enabled=yes
-
 - name: munge key is present
   copy: src=munge.key dest=/etc/munge/munge.key owner=munge group=munge mode=0600 force=yes
   notify: 
@@ -39,10 +36,10 @@
   - slurm.conf
   - cgroup.conf
   notify:
-  - slurm is restarted
+  - slurmctld is restarted
 
-- name: slurm is started and enabled
-  service: name=slurm state=started enabled=yes
+- name: slurmctld is started and enabled
+  service: name=slurmctld state=started enabled=yes
 
 - name: check if rsyslog.d exists
   stat: path="/etc/rsyslog.d"

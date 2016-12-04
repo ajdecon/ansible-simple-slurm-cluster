@@ -1,0 +1,54 @@
+---
+- name: munge and slurm are installed
+  yum: name={{item}} state=present
+  with_items:
+  - munge
+  - slurm
+  - slurm-munge
+  - slurm-plugins
+  - slurm-pam_slurm
+  - slurm-perlapi
+  - libcgroup
+
+- name: munge key is present
+  copy: src=munge.key dest=/etc/munge/munge.key owner=munge group=munge mode=0600 force=yes
+  notify: 
+  - munge is restarted
+
+- name: munge is started and enabled
+  service: name=munge state=started enabled=yes
+
+- name: slurm group exists
+  group: name=slurm state=present
+
+- name: slurm user exists
+  user: name=slurm group=slurm state=present
+
+- name: slurm_state_dir exists
+  file: path={{ slurm_state_dir }} owner=slurm group=slurm mode=0755 state=directory
+
+- name: accounting storage file exists
+  file: path={{ slurm_acct_file }} owner=slurm group=slurm mode=0644 state=touch
+
+- name: slurm is configured
+  template: src={{item}} dest=/etc/slurm/{{item}} owner=slurm mode=0644
+  with_items:
+  - slurm.conf
+  - cgroup.conf
+  notify:
+  - slurmd is restarted
+
+- name: slurmd is started and enabled
+  service: name=slurmd state=started enabled=yes
+
+- name: check if rsyslog.d exists
+  stat: path="/etc/rsyslog.d"
+  register: check_rsyslogd
+
+- when: check_rsyslogd.stat.exists
+  name: drop rsyslog.d config file
+  copy: src="slurm_import.conf" dest="/etc/rsyslog.d/slurm_import.conf"
+        owner=root group=root mode=0444
+  notify:
+  - rsyslog is restarted
+

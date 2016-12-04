@@ -1,6 +1,6 @@
 ---
 openblas_enabled: true
-openmpi_enabled: false
+openmpi_enabled: true
 mpich2_enabled: true
 python_enabled: false
 openib_enabled: true

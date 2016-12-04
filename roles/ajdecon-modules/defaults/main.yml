@@ -1,0 +1,11 @@
+---
+devtools:
+- foss-2016b
+- Chapel-1.14.0-foss-2016b
+- Spark-2.0.0
+- Cython-0.24.1-foss-2016b-Python-2.7.11
+
+applications:
+- "QuantumESPRESSO-5.4.0-foss-2016b-hybrid"
+- "GROMACS-5.1.4-foss-2016b-mt"
+- "OSU-Micro-Benchmarks-5.3.2-foss-2016b"

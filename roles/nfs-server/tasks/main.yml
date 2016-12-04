@@ -1,10 +1,9 @@
 ---
 - name: ensure nfs-related packages are installed
-  yum: name={{item}} state=present
+  yum: name={{item}} state=latest
   with_items:
+  - lvm2
   - nfs-utils
-  - nfs-utils-lib
-  - nfs-utils-lib-devel
   - nfs4-acl-tools
 
 - name: configure exports
@@ -15,5 +14,5 @@
 - name: ensure rpcbind is running
   service: name=rpcbind state=started enabled=yes
 
-- name: ensure nfs is running
-  service: name=nfs state=started enabled=yes
+- name: ensure nfs-server is running
+  service: name=nfs-server state=started enabled=yes

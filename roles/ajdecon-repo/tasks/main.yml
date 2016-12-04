@@ -5,5 +5,5 @@
 - name: install yum-s3
   action: yum name=/tmp/yum-s3-0.2.4-1.noarch.rpm state=present
   
-- name: yum.repos.d includes ajdecon-repo.el6.repo
-  action: template src=ajdecon-repo.el6.repo.j2 dest=/etc/yum.repos.d/ajdecon-repo.el6.repo 
+- name: yum.repos.d includes ajdecon-repo.el7.repo
+  action: template src=ajdecon-repo.el7.repo.j2 dest=/etc/yum.repos.d/ajdecon-repo.el7.repo 

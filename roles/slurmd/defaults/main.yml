@@ -1,0 +1,15 @@
+---
+slurmctld_host: head
+
+slurmdbd_enabled: false
+slurmdbd_host: head
+
+slurm_compute_group: compute
+slurm_cluster_name: defaultcluster
+slurm_partition_name: debug
+slurm_cpus_per_node: 1
+
+slurm_state_dir: /var/lib/slurm
+slurm_acct_file: /var/log/slurm_jobacct.log
+
+slurm_log_to_syslog: false
