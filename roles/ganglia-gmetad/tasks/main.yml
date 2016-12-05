@@ -6,6 +6,11 @@
   - ganglia-gmetad
   - ganglia-web
 
+- name: ensure /var/lib/ganglia/rrds is owned by nobody
+  file:
+    path: "/var/lib/ganglia/rrds"
+    owner: "nobody"
+
 - name: gmetad is configured
   template: src="gmetad.conf" dest="/etc/ganglia/gmetad.conf"
   notify:
@@ -29,3 +34,4 @@
 - name: ensure /var/lib/ganglia/dwoo/compiled is writable by web interface
   when: enable_web_interface
   file: path=/var/lib/ganglia/dwoo/compiled group=apache mode=0775
+
