@@ -10,7 +10,7 @@ the roles in this repo to set up ephemeral clusters while playing with new
 ideas or writing software. I am rarely concerned with stability or user
 experience, and more often with seeing what I can break. :) YMMV!
 
-They have mostly been tested on EC2 but there's
+They have mostly been tested on EC2 using ami-5492ba3c, but there's
 nothing cloud-specific in them, so they should work on normal hardware.
 
 
